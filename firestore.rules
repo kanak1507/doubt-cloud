@@ -1,0 +1,20 @@
+// Development-only rules for the hackathon scaffold.
+// Before public deployment, add authentication or another abuse-control strategy.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /sessions/{sessionId} {
+      allow read, create: if true;
+      allow update: if true;
+
+      match /doubts/{doubtId} {
+        allow read, create: if true;
+        allow update: if true;
+      }
+
+      match /clusters/{clusterId} {
+        allow read, create, update: if true;
+      }
+    }
+  }
+}
